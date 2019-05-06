@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MvvmSampleApp"
         xmlns:myViews="clr-namespace:MvvmSampleApp.Views"
+        xmlns:myControls="clr-namespace:MvvmSampleApp.Controls"
         xmlns:myViewModels="clr-namespace:MvvmSampleApp.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
@@ -13,7 +14,7 @@
     </Window.Resources>
     <Grid DataContext="{DynamicResource ViewModel}">
         <StackPanel Orientation="Horizontal">
-            <ItemsControl ItemsSource="{Binding Items}"  Margin="10">
+            <ItemsControl ItemsSource="{Binding Items}" Margin="10">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <!-- Can still access VM context even from within item context -->
@@ -21,6 +22,7 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+            <myControls:SampleControl x:Name="sampleControlCtrl" TextFontSize="{Binding SelectedFontSize}" Margin="10"/>
         </StackPanel>
     </Grid>
 </Window>

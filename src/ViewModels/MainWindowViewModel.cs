@@ -19,11 +19,8 @@ namespace MvvmSampleApp.ViewModels
             set { SetProperty(ref selectedFontSize, value); }
         }
 
-        // TODO: fix DI not loading view
-        // TODO: https://gist.github.com/wi7a1ian/4f2d650c0474f9f4c745b291f7bdb143
         // TODO: commands https://gist.github.com/wi7a1ian/28c042b64cfd26e8e3bb5de64c0d50f6
         // TODO: events https://gist.github.com/wi7a1ian/1eb34a2d1135cacc0af64106301f853b
-        // TODO: dependency prop https://gist.github.com/wi7a1ian/6c142e238e89458f70e7d8cdcb890f1c  https://gist.github.com/wi7a1ian/bb84bd1ffecbbe80385da1658055fdfb
 
         public MainWindowViewModel()
         {

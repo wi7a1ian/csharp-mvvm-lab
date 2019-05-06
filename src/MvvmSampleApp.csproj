@@ -66,12 +66,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\SampleControl.xaml.cs">
+      <DependentUpon>SampleControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Core\IItemsRepository.cs" />
     <Compile Include="Infrastructure\Data\ItemsRepository.cs" />
     <Compile Include="ViewModels\Helpers\BaseViewModel.cs" />
+    <Compile Include="ViewModels\SampleControlViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="ViewModels\SecondViewModel.cs" />
-    <Page Include="Views\SecondView.xaml">
+    <Page Include="Controls\SampleControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -85,9 +88,6 @@
     </Compile>
     <Compile Include="ViewModels\Helpers\BindableBase.cs" />
     <Compile Include="ViewModels\Helpers\RelayCommand.cs" />
-    <Compile Include="Views\SecondView.xaml.cs">
-      <DependentUpon>SecondView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -120,8 +120,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controls\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
