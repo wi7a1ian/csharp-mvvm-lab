@@ -41,6 +41,7 @@ namespace MvvmSampleApp.ViewModels
         {
             if (!isLoaded)
             {
+                // TODO: listen for changes in sampleControlCtrl.TextFontSizeProperty   https://gist.github.com/wi7a1ian/6c142e238e89458f70e7d8cdcb890f1c
                 isLoaded = true;
             }
         }
