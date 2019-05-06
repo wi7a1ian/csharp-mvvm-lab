@@ -1,0 +1,17 @@
+﻿<Window x:Class="MvvmSampleApp.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MvvmSampleApp"
+        xmlns:myViews="clr-namespace:MvvmSampleApp.Views"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <StackPanel Orientation="Horizontal">
+            <myViews:FirstSampleView x:Name="firstSampleACtrl" Margin="10" />
+            <myViews:FirstSampleView x:Name="firstSampleBCtrl" Margin="10" />
+            <myViews:FirstSampleView x:Name="firstSampleCCtrl" Margin="10" />
+        </StackPanel>
+    </Grid>
+</Window>
