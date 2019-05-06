@@ -2,7 +2,7 @@
 
 namespace MvvmSampleApp.ViewModels.Helpers
 {
-    public class BaseViewModel : BindableBase
+    public class ViewModelBase : BindableBase
     {
         public static bool IsInDesignMode()
         {

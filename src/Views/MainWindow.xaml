@@ -22,7 +22,12 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <myControls:SampleControl x:Name="sampleControlCtrl" TextFontSize="{Binding SelectedFontSize}" Margin="10"/>
+            <StackPanel>
+                <myControls:SampleControl TextFontSize="{Binding SelectedFontSize, Source={StaticResource ViewModel}}" Margin="10"/>
+                <myControls:ExtendedControl TextFontSize="{Binding SelectedFontSize}" Margin="10"/>
+                <myControls:WithInjectedVmControl DataContext="{Binding SubViewModel}" Margin="10" />
+                <myControls:WithOwnVmControl TextFontSize="{Binding SelectedFontSize}" Margin="10"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>

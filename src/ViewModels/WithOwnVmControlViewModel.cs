@@ -5,7 +5,7 @@ using MvvmSampleApp.ViewModels.Helpers;
 
 namespace MvvmSampleApp.ViewModels
 {
-    public class SampleControlViewModel : BaseViewModel
+    public class WithOwnVmControlViewModel : ViewModelBase
     {
         private string sampleText = string.Empty;
         public string SampleText
@@ -21,7 +21,7 @@ namespace MvvmSampleApp.ViewModels
             set { SetProperty(ref textFontSize, value); }
         }
 
-        public SampleControlViewModel()
+        public WithOwnVmControlViewModel()
         {
             SampleText = "Loren Ipsum.\nLoren Ipsum.\nLoren Ipsum.\nLoren Ipsum.\n";
         }

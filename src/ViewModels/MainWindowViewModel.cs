@@ -5,10 +5,22 @@ using MvvmSampleApp.ViewModels.Helpers;
 
 namespace MvvmSampleApp.ViewModels
 {
-    public class MainWindowViewModel : BaseViewModel
+    public class SomeSubViewModel : ViewModelBase
+    {
+        private int selectedSubFontSize = 16;
+        public int SelectedSubFontSize
+        {
+            get { return selectedSubFontSize; }
+            set { SetProperty(ref selectedSubFontSize, value); }
+        }
+    }
+
+    public class MainWindowViewModel : ViewModelBase
     {
         private bool isLoaded = false;
         private readonly IItemsRepository itemsRepository;
+
+        public SomeSubViewModel SubViewModel { get; set; }  = new SomeSubViewModel();
 
         public IList<string> Items { get; set; }
         
@@ -21,6 +33,7 @@ namespace MvvmSampleApp.ViewModels
 
         // TODO: commands https://gist.github.com/wi7a1ian/28c042b64cfd26e8e3bb5de64c0d50f6
         // TODO: events https://gist.github.com/wi7a1ian/1eb34a2d1135cacc0af64106301f853b
+        // TODO: display another view (subview)
 
         public MainWindowViewModel()
         {

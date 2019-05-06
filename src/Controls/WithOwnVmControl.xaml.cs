@@ -16,9 +16,15 @@ using System.Windows.Shapes;
 
 namespace MvvmSampleApp.Controls
 {
-    public partial class SampleControl : UserControl
+    public partial class WithOwnVmControl : UserControl
     {
-        public SampleControl()
+        public WithOwnVmControlViewModel Model
+        {
+            set { Resources["ViewModel"] = value; }
+            get { return (WithOwnVmControlViewModel)Resources["ViewModel"]; }
+        }
+
+        public WithOwnVmControl()
         {
             InitializeComponent();
         }
@@ -27,15 +33,24 @@ namespace MvvmSampleApp.Controls
 
         public static readonly DependencyProperty TextFontSizeProperty =
                 DependencyProperty.Register(nameof(TextFontSize), typeof(int),
-                typeof(SampleControl),
-                new FrameworkPropertyMetadata(4, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+                typeof(WithOwnVmControl),
+                new FrameworkPropertyMetadata(4, TextFontSizeChanged));
 
         public int TextFontSize
         {
             get { return (int)GetValue(TextFontSizeProperty); }
             set { SetValue(TextFontSizeProperty, value); }
         }
+        private static void TextFontSizeChanged(DependencyObject source, DependencyPropertyChangedEventArgs e)
+        {
+            (source as WithOwnVmControl).SetMyTextSize((int)e.NewValue);
+        }
 
-        #endregion
+        #endregion dependency properties
+
+        public void SetMyTextSize(int size)
+        {
+            Model.MyFontSize = size;
+        }
     }
 }
