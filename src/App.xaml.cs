@@ -31,16 +31,13 @@ namespace MvvmSampleApp
         private void ConfigureUnityDiContainer(IUnityContainer container)
         {
             // repos:
-            container.RegisterType<IFirstSampleItemsRepository, FirstSampleItemsRepository>();
+            container.RegisterType<IItemsRepository, ItemsRepository>();
 
             // services:
             // none
 
             // viewmodels:
-            container.RegisterType<FirstSampleViewModel>(new InjectionConstructor(typeof(IFirstSampleItemsRepository)));
-
-            // views
-            container.RegisterType<FirstSampleView>(new InjectionProperty("Model", new ResolvedParameter<FirstSampleViewModel>()));
+            container.RegisterType<MainWindowViewModel>(new InjectionConstructor(typeof(Core.IItemsRepository)));
         }
     }
 }

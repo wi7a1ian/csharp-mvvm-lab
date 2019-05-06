@@ -5,10 +5,10 @@ using MvvmSampleApp.ViewModels.Helpers;
 
 namespace MvvmSampleApp.ViewModels
 {
-    public class FirstSampleViewModel : BindableBase
+    public class MainWindowViewModel : BaseViewModel
     {
         private bool isLoaded = false;
-        private readonly IFirstSampleItemsRepository itemsRepository;
+        private readonly IItemsRepository itemsRepository;
 
         public IList<string> Items { get; set; }
         
@@ -25,13 +25,15 @@ namespace MvvmSampleApp.ViewModels
         // TODO: events https://gist.github.com/wi7a1ian/1eb34a2d1135cacc0af64106301f853b
         // TODO: dependency prop https://gist.github.com/wi7a1ian/6c142e238e89458f70e7d8cdcb890f1c  https://gist.github.com/wi7a1ian/bb84bd1ffecbbe80385da1658055fdfb
 
-        public FirstSampleViewModel()
+        public MainWindowViewModel()
         {
-            // design-time data:
-            Items = new List<string> { "Item A", "Item B", "Item C", "Item D", "Item E" };
+            if(IsInDesignMode())
+            {
+                Items = new List<string> { "Item A", "Item B", "Item C", "Item D", "Item E" };
+            }
         }
 
-        public FirstSampleViewModel(IFirstSampleItemsRepository itemsRepository)
+        public MainWindowViewModel(IItemsRepository itemsRepository)
         {
             this.itemsRepository = itemsRepository;
 

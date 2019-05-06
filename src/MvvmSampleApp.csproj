@@ -66,10 +66,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Core\IFirstSampleItemsRepository.cs" />
-    <Compile Include="Infrastructure\Data\FirstSampleItemsRepository.cs" />
-    <Compile Include="ViewModels\FirstSampleViewModel.cs" />
-    <Page Include="Views\FirstSampleView.xaml">
+    <Compile Include="Core\IItemsRepository.cs" />
+    <Compile Include="Infrastructure\Data\ItemsRepository.cs" />
+    <Compile Include="ViewModels\Helpers\BaseViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\SecondViewModel.cs" />
+    <Page Include="Views\SecondView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -83,8 +85,8 @@
     </Compile>
     <Compile Include="ViewModels\Helpers\BindableBase.cs" />
     <Compile Include="ViewModels\Helpers\RelayCommand.cs" />
-    <Compile Include="Views\FirstSampleView.xaml.cs">
-      <DependentUpon>FirstSampleView.xaml</DependentUpon>
+    <Compile Include="Views\SecondView.xaml.cs">
+      <DependentUpon>SecondView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

@@ -8,19 +8,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="200">
     <UserControl.Resources>
-        <viewModels:FirstSampleViewModel x:Key="ViewModel" />
+        <viewModels:SecondViewModel x:Key="ViewModel" />
     </UserControl.Resources>
-    <UserControl.DataContext>
-        <viewModels:FirstSampleViewModel/>
-    </UserControl.DataContext>
     <Grid DataContext="{StaticResource ViewModel}">
-        <ItemsControl ItemsSource="{Binding Items}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <!-- Can still access VM context even from within item context -->
-                    <TextBlock FontSize="{Binding SelectedFontSize, Source={StaticResource ViewModel}}" Text="{Binding}" />
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
     </Grid>
 </UserControl>

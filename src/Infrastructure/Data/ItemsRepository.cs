@@ -7,7 +7,7 @@ using MvvmSampleApp.Core;
 
 namespace MvvmSampleApp.Infrastructure
 {
-    public class FirstSampleItemsRepository : IFirstSampleItemsRepository
+    public class ItemsRepository : IItemsRepository
     {
         private int prevStartIndex = 0;
 

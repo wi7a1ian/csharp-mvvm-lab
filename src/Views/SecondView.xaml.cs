@@ -23,10 +23,10 @@ namespace MvvmSampleApp.Views
     public partial class FirstSampleView : UserControl
     {
         [Dependency]
-        public FirstSampleViewModel Model
+        public SecondViewModel Model
         {
             set { Resources["ViewModel"] = value; }
-            get { return (FirstSampleViewModel)Resources["ViewModel"]; }
+            get { return (SecondViewModel)Resources["ViewModel"]; }
         }
 
         public FirstSampleView()

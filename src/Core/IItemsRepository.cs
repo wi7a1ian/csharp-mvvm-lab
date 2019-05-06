@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MvvmSampleApp.Core
 {
-    public interface IFirstSampleItemsRepository
+    public interface IItemsRepository
     {
         IEnumerable<string> GetItems(int count);
     }
