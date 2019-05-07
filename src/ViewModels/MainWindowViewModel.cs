@@ -6,6 +6,7 @@ using System.Windows.Input;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.ComponentModel;
+using MvvmSampleApp.Models;
 
 namespace MvvmSampleApp.ViewModels
 {
@@ -28,9 +29,9 @@ namespace MvvmSampleApp.ViewModels
                 set { SetProperty(ref selectedSubFontSize, value); }
             }
 
-            public string SomeTextFromChildControl
+            public SomePassedBetweenCtrlsModel SomeDataFromChildControl
             {
-                set { MessageBox.Show(value); }
+                set { MessageBox.Show(value.SecretText); }
             }
         }
         public SomeSubViewModel SubViewModel { get; } = new SomeSubViewModel();

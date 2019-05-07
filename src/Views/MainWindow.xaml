@@ -31,8 +31,7 @@
                 <Separator />
                 <myControls:WithOwnVmControl TextFontSize="{Binding SelectedFontSize}"/>
                 <Separator />
-                <!-- , Mode=OneWayToSource -->
-                <myControls:ListeningForPropControl SomeText="{Binding Path=SubViewModel.SomeTextFromChildControl}"/>
+                <myControls:ListeningForPropControl SomeData="{Binding Path=SubViewModel.SomeDataFromChildControl, Mode=TwoWay}"/>
             </StackPanel>
             <StackPanel Margin="10">
                 <Label>Change font size:</Label>

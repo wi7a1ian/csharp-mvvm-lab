@@ -1,4 +1,5 @@
-﻿using MvvmSampleApp.ViewModels;
+﻿using MvvmSampleApp.Models;
+using MvvmSampleApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace MvvmSampleApp.Controls
 
         private void PressMe_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            SomeText = "Howdy howdy I'm a cowboy";
+            SomeData = new SomePassedBetweenCtrlsModel{ SecretText = "Howdy howdy I'm a cowboy" };
         }
 
         #endregion
@@ -40,13 +41,13 @@ namespace MvvmSampleApp.Controls
         #region dependency properties
 
         public static readonly DependencyProperty SomeTextProperty =
-                DependencyProperty.Register(nameof(SomeText), typeof(string),
-                typeof(ListeningForPropControl),
-                new FrameworkPropertyMetadata("Howdy", FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+                DependencyProperty.Register(nameof(SomeData), typeof(SomePassedBetweenCtrlsModel),
+                typeof(ListeningForPropControl), 
+                new FrameworkPropertyMetadata(new SomePassedBetweenCtrlsModel()/*, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault*/));
 
-        public string SomeText
+        public SomePassedBetweenCtrlsModel SomeData
         {
-            get { return (string)GetValue(SomeTextProperty); }
+            get { return (SomePassedBetweenCtrlsModel)GetValue(SomeTextProperty); }
             set { SetValue(SomeTextProperty, value); }
         }
 
