@@ -2,28 +2,39 @@
 using System.Collections.Generic;
 using MvvmSampleApp.Core;
 using MvvmSampleApp.ViewModels.Helpers;
+using System.Windows.Input;
+using System.Collections.ObjectModel;
 
 namespace MvvmSampleApp.ViewModels
 {
-    public class SomeSubViewModel : ViewModelBase
-    {
-        private int selectedSubFontSize = 16;
-        public int SelectedSubFontSize
-        {
-            get { return selectedSubFontSize; }
-            set { SetProperty(ref selectedSubFontSize, value); }
-        }
-    }
+    // TODO: switch to another view (subview)
+    // TODO: listen for changes in sampleControlCtrl.TextFontSizeProperty   https://gist.github.com/wi7a1ian/6c142e238e89458f70e7d8cdcb890f1c
 
     public class MainWindowViewModel : ViewModelBase
     {
         private bool isLoaded = false;
         private readonly IItemsRepository itemsRepository;
 
-        public SomeSubViewModel SubViewModel { get; set; }  = new SomeSubViewModel();
+        #region subviewmodels
 
-        public IList<string> Items { get; set; }
-        
+        public class SomeSubViewModel : ViewModelBase
+        {
+            private int selectedSubFontSize = 16;
+            public int SelectedSubFontSize
+            {
+                get { return selectedSubFontSize; }
+                set { SetProperty(ref selectedSubFontSize, value); }
+            }
+        }
+        public SomeSubViewModel SubViewModel { get; } = new SomeSubViewModel();
+
+        #endregion
+
+        #region bindable properties/collactions
+
+        public ObservableCollection<string> Items { get; } = new ObservableCollection<string>();
+
+
         private int selectedFontSize = 16;
         public int SelectedFontSize
         {
@@ -31,30 +42,38 @@ namespace MvvmSampleApp.ViewModels
             set { SetProperty(ref selectedFontSize, value); }
         }
 
-        // TODO: commands https://gist.github.com/wi7a1ian/28c042b64cfd26e8e3bb5de64c0d50f6
-        // TODO: events https://gist.github.com/wi7a1ian/1eb34a2d1135cacc0af64106301f853b
-        // TODO: display another view (subview)
+        #endregion
 
+        #region commands
+
+        public ICommand ChangeFontSizeCommand { get; private set; }
+
+        #endregion
+        
         public MainWindowViewModel()
         {
-            if(IsInDesignMode())
+            ConfigureCommands();
+
+            if (IsInDesignMode())
             {
-                Items = new List<string> { "Item A", "Item B", "Item C", "Item D", "Item E" };
+                var fakeItems = new List<string> { "Item A", "Item B", "Item C", "Item D", "Item E" };
+                foreach (var i in fakeItems) Items.Add(i);
             }
         }
+
 
         public MainWindowViewModel(IItemsRepository itemsRepository)
         {
             this.itemsRepository = itemsRepository;
 
-            Items = itemsRepository.GetItems(10).ToList();
+            ConfigureCommands();
         }
 
         public void Loaded()
         {
             if (!isLoaded)
             {
-                // TODO: listen for changes in sampleControlCtrl.TextFontSizeProperty   https://gist.github.com/wi7a1ian/6c142e238e89458f70e7d8cdcb890f1c
+                foreach (var i in itemsRepository.GetItems(10)) Items.Add(i);
                 isLoaded = true;
             }
         }
@@ -63,8 +82,17 @@ namespace MvvmSampleApp.ViewModels
         {
             if (isLoaded)
             {
+                Items.Clear();
                 isLoaded = false;
             }
         }
+
+        private void ConfigureCommands()
+        {
+            ChangeFontSizeCommand = new RelayCommand<string>(
+                async direction => { SelectedFontSize += (direction.Equals("+")) ? 1 : -1; SubViewModel.SelectedSubFontSize = SelectedFontSize; },
+                _ => true);
+        }
+
     }
 }

@@ -22,11 +22,21 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <StackPanel>
-                <myControls:SampleControl TextFontSize="{Binding SelectedFontSize, Source={StaticResource ViewModel}}" Margin="10"/>
-                <myControls:ExtendedControl TextFontSize="{Binding SelectedFontSize}" Margin="10"/>
-                <myControls:WithInjectedVmControl DataContext="{Binding SubViewModel}" Margin="10" />
-                <myControls:WithOwnVmControl TextFontSize="{Binding SelectedFontSize}" Margin="10"/>
+            <StackPanel Margin="10">
+                <myControls:SampleControl TextFontSize="{Binding SelectedFontSize, Source={StaticResource ViewModel}}" />
+                <Separator />
+                <myControls:ExtendedControl TextFontSize="{Binding SelectedFontSize}"/>
+                <Separator />
+                <myControls:WithInjectedVmControl DataContext="{Binding SubViewModel}"/>
+                <Separator />
+                <myControls:WithOwnVmControl TextFontSize="{Binding SelectedFontSize}"/>
+            </StackPanel>
+            <StackPanel Margin="10">
+                <Label>Change font size:</Label>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="+" Width="30" Margin="0,0,5,0" Command="{Binding Path=ChangeFontSizeCommand}" CommandParameter="+" />
+                    <Button Content="-" Width="30" Command="{Binding Path=ChangeFontSizeCommand}" CommandParameter="-" />
+                </StackPanel>
             </StackPanel>
         </StackPanel>
     </Grid>
