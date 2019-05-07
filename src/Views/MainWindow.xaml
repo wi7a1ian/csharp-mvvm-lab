@@ -30,12 +30,15 @@
                 <myControls:WithInjectedVmControl DataContext="{Binding SubViewModel}"/>
                 <Separator />
                 <myControls:WithOwnVmControl TextFontSize="{Binding SelectedFontSize}"/>
+                <Separator />
+                <!-- , Mode=OneWayToSource -->
+                <myControls:ListeningForPropControl SomeText="{Binding Path=SubViewModel.SomeTextFromChildControl}"/>
             </StackPanel>
             <StackPanel Margin="10">
                 <Label>Change font size:</Label>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Content="+" Width="30" Margin="0,0,5,0" Command="{Binding Path=ChangeFontSizeCommand}" CommandParameter="+" />
-                    <Button Content="-" Width="30" Command="{Binding Path=ChangeFontSizeCommand}" CommandParameter="-" />
+                    <Button Content="+" Width="30" Margin="0,0,5,0" Command="{Binding ChangeFontSizeCommand}" CommandParameter="+" />
+                    <Button Content="-" Width="30" Command="{Binding ChangeFontSizeCommand}" CommandParameter="-" />
                 </StackPanel>
             </StackPanel>
         </StackPanel>

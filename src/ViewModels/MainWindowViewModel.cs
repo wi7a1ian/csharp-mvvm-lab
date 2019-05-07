@@ -4,12 +4,13 @@ using MvvmSampleApp.Core;
 using MvvmSampleApp.ViewModels.Helpers;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
+using System.Windows;
+using System.ComponentModel;
 
 namespace MvvmSampleApp.ViewModels
 {
     // TODO: switch to another view (subview)
-    // TODO: listen for changes in sampleControlCtrl.TextFontSizeProperty - https://gist.github.com/wi7a1ian/6c142e238e89458f70e7d8cdcb890f1c
-    // TODO: service locator pattern for injecting viewmodels - http://dotnetpattern.com/mvvm-light-toolkit-example
+    // TODO: service locator pattern for injecting viewmodels (avoid DI) - http://dotnetpattern.com/mvvm-light-toolkit-example
 
     public class MainWindowViewModel : ViewModelBase
     {
@@ -25,6 +26,11 @@ namespace MvvmSampleApp.ViewModels
             {
                 get { return selectedSubFontSize; }
                 set { SetProperty(ref selectedSubFontSize, value); }
+            }
+
+            public string SomeTextFromChildControl
+            {
+                set { MessageBox.Show(value); }
             }
         }
         public SomeSubViewModel SubViewModel { get; } = new SomeSubViewModel();
@@ -75,6 +81,9 @@ namespace MvvmSampleApp.ViewModels
             if (!isLoaded)
             {
                 foreach (var i in itemsRepository.GetItems(10)) Items.Add(i);
+
+                //PropertyChanged += (s,e) => MessageBox.Show((e as PropertyChangedEventArgs).PropertyName == nameof(SomeTextFromChildControl));
+
                 isLoaded = true;
             }
         }
@@ -91,7 +100,7 @@ namespace MvvmSampleApp.ViewModels
         private void ConfigureCommands()
         {
             ChangeFontSizeCommand = new RelayCommand<string>(
-                async direction => { SelectedFontSize += (direction.Equals("+")) ? 1 : -1; SubViewModel.SelectedSubFontSize = SelectedFontSize; },
+                /*async*/ direction => { SelectedFontSize += (direction.Equals("+")) ? 1 : -1; SubViewModel.SelectedSubFontSize = SelectedFontSize; },
                 _ => true);
         }
 
