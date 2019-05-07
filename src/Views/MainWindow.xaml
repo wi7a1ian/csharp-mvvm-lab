@@ -23,7 +23,7 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
             <StackPanel Margin="10">
-                <myControls:SampleControl TextFontSize="{Binding SelectedFontSize, Source={StaticResource ViewModel}}" />
+                <myControls:SampleControl TextFontSize="{Binding SelectedFontSize}" />
                 <Separator />
                 <myControls:ExtendedControl TextFontSize="{Binding SelectedFontSize}"/>
                 <Separator />

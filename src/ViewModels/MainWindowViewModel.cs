@@ -8,7 +8,8 @@ using System.Collections.ObjectModel;
 namespace MvvmSampleApp.ViewModels
 {
     // TODO: switch to another view (subview)
-    // TODO: listen for changes in sampleControlCtrl.TextFontSizeProperty   https://gist.github.com/wi7a1ian/6c142e238e89458f70e7d8cdcb890f1c
+    // TODO: listen for changes in sampleControlCtrl.TextFontSizeProperty - https://gist.github.com/wi7a1ian/6c142e238e89458f70e7d8cdcb890f1c
+    // TODO: service locator pattern for injecting viewmodels - http://dotnetpattern.com/mvvm-light-toolkit-example
 
     public class MainWindowViewModel : ViewModelBase
     {

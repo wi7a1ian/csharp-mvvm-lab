@@ -6,9 +6,8 @@
              xmlns:local="clr-namespace:MvvmSampleApp.Controls"
              xmlns:myViewModels="clr-namespace:MvvmSampleApp.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="300" 
-             DataContext="{Binding RelativeSource={RelativeSource Self}}">
-    <Grid>
+             d:DesignHeight="100" d:DesignWidth="300">
+    <Grid DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
         <StackPanel>
             <TextBlock FontSize="{Binding TextFontSize}">Loren ipsum.</TextBlock>
         </StackPanel>
