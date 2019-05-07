@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MvvmSampleApp.Models
 {
-    public class SomePassedBetweenCtrlsModel
+    public class SomePassedBetweenCtrlsModel /* can be : BindableBase */
     {
         public string SecretText { get; set; }
     }

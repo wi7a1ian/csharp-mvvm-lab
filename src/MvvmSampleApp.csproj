@@ -85,7 +85,7 @@
     <Compile Include="Infrastructure\Data\ItemsRepository.cs" />
     <Compile Include="Models\SomePassedBetweenCtrlsModel.cs" />
     <Compile Include="ViewModels\Helpers\ViewModelBase.cs" />
-    <Compile Include="ViewModels\WithOwnVmControlViewModel.cs" />
+    <Compile Include="ViewModels\Controls\WithOwnVmControlViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Page Include="Controls\ListeningForPropControl.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -149,6 +149,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ViewModels\Dialogs\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

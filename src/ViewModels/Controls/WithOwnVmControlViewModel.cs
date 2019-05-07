@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using MvvmSampleApp.Core;
 using MvvmSampleApp.ViewModels.Helpers;
 
-namespace MvvmSampleApp.ViewModels
+namespace MvvmSampleApp.ViewModels.Controls
 {
     public class WithOwnVmControlViewModel : ViewModelBase
     {
