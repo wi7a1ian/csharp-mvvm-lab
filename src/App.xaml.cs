@@ -1,16 +1,6 @@
-﻿using MvvmSampleApp.Views;
-using MvvmSampleApp.Core;
-using MvvmSampleApp.Infrastructure;
-using MvvmSampleApp.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using Unity;
-using Unity.Injection;
+using MvvmSampleApp.Views;
 
 namespace MvvmSampleApp
 {
@@ -21,23 +11,10 @@ namespace MvvmSampleApp
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            IUnityContainer container = new UnityContainer();
-            ConfigureUnityDiContainer(container);
+            MainWindow = DiConfig.GetContainer().Resolve<MainWindow>();
+            //MainWindow = DiConfig.GetContainer().Resolve<MainWindowWithVmFromLocator>();
 
-            MainWindow = container.Resolve<MainWindow>(); ;
             MainWindow.Show();
-        }
-
-        private void ConfigureUnityDiContainer(IUnityContainer container)
-        {
-            // repos:
-            container.RegisterType<IItemsRepository, ItemsRepository>();
-
-            // services:
-            // none
-
-            // viewmodels:
-            container.RegisterType<MainWindowViewModel>(new InjectionConstructor(typeof(Core.IItemsRepository)));
         }
     }
 }

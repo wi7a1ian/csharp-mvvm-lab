@@ -1,12 +1,11 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 
 namespace MvvmSampleApp.ViewModels.Helpers
 {
     public class ViewModelBase : BindableBase
     {
-        public static bool IsInDesignMode()
-        {
-            return (Application.Current.MainWindow == null);
-        }
+        private readonly static DependencyObject dummy = new DependencyObject();
+        public static bool IsInDesignMode() => DesignerProperties.GetIsInDesignMode(dummy);
     }
 }

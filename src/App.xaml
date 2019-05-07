@@ -7,6 +7,6 @@
              Startup="Application_Startup">
     <!-- removed StartupUri="MainWindow.xaml" -->
     <Application.Resources>
-
+        <myViewModels:ViewModelLocator x:Key="Locator" />
     </Application.Resources>
 </Application>

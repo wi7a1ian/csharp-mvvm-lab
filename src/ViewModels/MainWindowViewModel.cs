@@ -81,7 +81,10 @@ namespace MvvmSampleApp.ViewModels
         {
             if (!isLoaded)
             {
-                foreach (var i in itemsRepository.GetItems(10)) Items.Add(i);
+                if(itemsRepository != null)
+                {
+                    foreach (var i in itemsRepository.GetItems(10)) Items.Add(i);
+                }
 
                 //PropertyChanged += (s,e) => MessageBox.Show((e as PropertyChangedEventArgs).PropertyName == nameof(SomeTextFromChildControl));
 
