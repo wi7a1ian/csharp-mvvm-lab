@@ -2,6 +2,7 @@
 using MvvmSampleApp.Infrastructure;
 using MvvmSampleApp.ViewModels;
 using MvvmSampleApp.ViewModels.Helpers;
+using MvvmSampleApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,9 @@ namespace MvvmSampleApp
             // none
 
             // viewmodels:
+            
+            container.RegisterType<WithVmAsStaticResMainView>();
+            container.RegisterType<ShellViewModel>();
             if(ViewModelBase.IsInDesignMode())
             {
                 container.RegisterType<MainWindowViewModel>(new InjectionConstructor());
@@ -45,9 +49,8 @@ namespace MvvmSampleApp
             }
 
             // other
+            // from file: unityContainer.LoadConfiguration();
             ConfigureInjectionFactories(container);
-
-            // unityContainer.LoadConfiguration();
         }
 
         private static void ConfigureInjectionFactories(IUnityContainer container)

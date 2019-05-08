@@ -10,9 +10,6 @@ using MvvmSampleApp.Models;
 
 namespace MvvmSampleApp.ViewModels
 {
-    // TODO: switch to another view (subview)
-    // TODO: service locator pattern for injecting viewmodels (avoid DI) - http://dotnetpattern.com/mvvm-light-toolkit-example
-
     public class MainWindowViewModel : ViewModelBase
     {
         private bool isLoaded = false;

@@ -15,21 +15,13 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Unity;
 
-namespace MvvmSampleApp.Views
+namespace MvvmSampleApp
 {
-    public partial class MainWindowWithVmFromLocator : Window
+    public partial class Shell : Window
     {
-        public MainWindowViewModel Model
-        {
-            get { return (FindName("root") as FrameworkElement)?.DataContext as MainWindowViewModel; }
-        }
-
-        public MainWindowWithVmFromLocator()
+        public Shell()
         {
             InitializeComponent();
-            
-            Loaded += (_, __) => { Model.Loaded(); };
-            Unloaded += (_, __) => { Model.Unloaded(); };
         }
     }
 }

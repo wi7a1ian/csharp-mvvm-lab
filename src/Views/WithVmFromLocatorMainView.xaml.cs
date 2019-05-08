@@ -17,19 +17,17 @@ using Unity;
 
 namespace MvvmSampleApp.Views
 {
-    public partial class MainWindow : Window
+    public partial class WithVmFromLocatorMainView : UserControl
     {
-        [Dependency]
         public MainWindowViewModel Model
         {
-            set { Resources["ViewModel"] = value; }
-            get { return (MainWindowViewModel)Resources["ViewModel"]; }
+            get { return (FindName("root") as FrameworkElement)?.DataContext as MainWindowViewModel; }
         }
 
-        public MainWindow()
+        public WithVmFromLocatorMainView()
         {
             InitializeComponent();
-
+            
             Loaded += (_, __) => { Model.Loaded(); };
             Unloaded += (_, __) => { Model.Unloaded(); };
         }

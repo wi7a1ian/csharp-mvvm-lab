@@ -85,6 +85,7 @@
     <Compile Include="DiConfig.cs" />
     <Compile Include="Infrastructure\Data\ItemsRepository.cs" />
     <Compile Include="Models\SomePassedBetweenCtrlsModel.cs" />
+    <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="ViewModels\Helpers\ViewModelBase.cs" />
     <Compile Include="ViewModels\Controls\WithOwnVmControlViewModel.cs" />
@@ -109,11 +110,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MainWindowWithVmFromLocator.xaml">
+    <Page Include="Shell.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\MainWindow.xaml">
+    <Page Include="Views\WithVmFromLocatorMainView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\WithVmAsStaticResMainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -123,11 +128,14 @@
     </Compile>
     <Compile Include="ViewModels\Helpers\BindableBase.cs" />
     <Compile Include="ViewModels\Helpers\RelayCommand.cs" />
-    <Compile Include="Views\MainWindowWithVmFromLocator.xaml.cs">
-      <DependentUpon>MainWindowWithVmFromLocator.xaml</DependentUpon>
+    <Compile Include="Shell.xaml.cs">
+      <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="Views\WithVmFromLocatorMainView.xaml.cs">
+      <DependentUpon>WithVmFromLocatorMainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WithVmAsStaticResMainView.xaml.cs">
+      <DependentUpon>WithVmAsStaticResMainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

@@ -1,0 +1,20 @@
+﻿<Window x:Class="MvvmSampleApp.Shell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MvvmSampleApp"
+        xmlns:myViews="clr-namespace:MvvmSampleApp.Views"
+        xmlns:myControls="clr-namespace:MvvmSampleApp.Controls"
+        xmlns:myViewModels="clr-namespace:MvvmSampleApp.ViewModels"
+        mc:Ignorable="d"
+        Title="MVVM Lab" Height="450" Width="800">
+    <!-- Role - a master page providing the layout structure for the application
+        Define certain top-level UI elements, such as the background, main menu, toolbar, define styles and borders. -->
+    <Grid DataContext="{Binding ShellViewModel, Source={StaticResource Locator}}">
+        <StackPanel Orientation="Horizontal">
+            <myViews:WithVmAsStaticResMainView Width="400"/>
+            <myViews:WithVmFromLocatorMainView/>
+        </StackPanel>
+    </Grid>
+</Window>
