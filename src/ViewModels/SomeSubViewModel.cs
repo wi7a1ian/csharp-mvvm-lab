@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using MvvmSampleApp.Core;
 using MvvmSampleApp.ViewModels.Helpers;
 
-namespace MvvmSampleApp.ViewModels.Controls
+namespace MvvmSampleApp.ViewModels
 {
-    public class WithOwnVmControlViewModel : ViewModelBase
+    public class SomeSubViewModel : ViewModelBase
     {
         private string sampleText = string.Empty;
         public string SampleText
@@ -21,7 +21,7 @@ namespace MvvmSampleApp.ViewModels.Controls
             set { SetProperty(ref textFontSize, value); }
         }
 
-        public WithOwnVmControlViewModel()
+        public SomeSubViewModel()
         {
             SampleText = "Loren Ipsum.\nLoren Ipsum.\nLoren Ipsum.\nLoren Ipsum.\n";
         }

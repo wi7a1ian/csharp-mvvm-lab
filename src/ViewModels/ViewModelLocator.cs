@@ -1,10 +1,4 @@
 ﻿using Unity;
-using MvvmSampleApp.ViewModels.Controls;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MvvmSampleApp.ViewModels
 {
@@ -12,6 +6,6 @@ namespace MvvmSampleApp.ViewModels
     {
         public ShellViewModel ShellViewModel => DiConfig.GetContainer().Resolve<ShellViewModel>();
         public MainWindowViewModel MainWindowViewModel => DiConfig.GetContainer().Resolve<MainWindowViewModel>();
-        public WithOwnVmControlViewModel WithOwnVmControlViewModel => DiConfig.GetContainer().Resolve<WithOwnVmControlViewModel>();
+        public SomeSubViewModel WithOwnVmControlViewModel => DiConfig.GetContainer().Resolve<SomeSubViewModel>();
     }
 }

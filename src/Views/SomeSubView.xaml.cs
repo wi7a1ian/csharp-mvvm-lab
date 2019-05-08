@@ -1,4 +1,4 @@
-﻿using MvvmSampleApp.ViewModels.Controls;
+﻿using MvvmSampleApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,17 +14,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MvvmSampleApp.Controls
+namespace MvvmSampleApp.Views
 {
-    public partial class WithOwnVmControl : UserControl
+    public partial class SomeSubView : UserControl
     {
-        public WithOwnVmControlViewModel Model
+        public SomeSubViewModel Model
         {
             set { Resources["ViewModel"] = value; }
-            get { return (WithOwnVmControlViewModel)Resources["ViewModel"]; }
+            get { return (SomeSubViewModel)Resources["ViewModel"]; }
         }
 
-        public WithOwnVmControl()
+        public SomeSubView()
         {
             InitializeComponent();
         }
@@ -33,7 +33,7 @@ namespace MvvmSampleApp.Controls
 
         public static readonly DependencyProperty TextFontSizeProperty =
                 DependencyProperty.Register(nameof(TextFontSize), typeof(int),
-                typeof(WithOwnVmControl),
+                typeof(SomeSubView),
                 new FrameworkPropertyMetadata(4, TextFontSizeChanged));
 
         public int TextFontSize
@@ -43,7 +43,7 @@ namespace MvvmSampleApp.Controls
         }
         private static void TextFontSizeChanged(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
-            (source as WithOwnVmControl).SetMyTextSize((int)e.NewValue);
+            (source as SomeSubView).SetMyTextSize((int)e.NewValue);
         }
 
         #endregion dependency properties

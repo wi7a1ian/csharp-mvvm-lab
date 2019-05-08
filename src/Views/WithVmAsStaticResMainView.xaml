@@ -27,7 +27,7 @@
                 <Separator />
                 <myControls:WithInjectedVmControl DataContext="{Binding SubViewModel}"/>
                 <Separator />
-                <myControls:WithOwnVmControl TextFontSize="{Binding SelectedFontSize}"/>
+                <myViews:SomeSubView TextFontSize="{Binding SelectedFontSize}"/>
                 <Separator />
                 <myControls:ListeningForPropControl SomeData="{Binding Path=SubViewModel.SomeDataFromChildControl, Mode=TwoWay}"/>
             </StackPanel>

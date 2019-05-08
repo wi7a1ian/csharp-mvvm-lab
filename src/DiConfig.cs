@@ -1,15 +1,11 @@
-﻿using MvvmSampleApp.Core;
+﻿using System;
+using Unity;
+using Unity.Injection;
+using MvvmSampleApp.Core;
 using MvvmSampleApp.Infrastructure;
 using MvvmSampleApp.ViewModels;
 using MvvmSampleApp.ViewModels.Helpers;
 using MvvmSampleApp.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Unity;
-using Unity.Injection;
 
 namespace MvvmSampleApp
 {
