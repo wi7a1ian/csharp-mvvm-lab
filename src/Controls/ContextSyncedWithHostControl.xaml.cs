@@ -16,9 +16,9 @@ using System.Windows.Shapes;
 
 namespace MvvmSampleApp.Controls
 {
-    public partial class WithInjectedVmControl : UserControl
+    public partial class ContextSyncedWithHostControl : UserControl
     {
-        public WithInjectedVmControl()
+        public ContextSyncedWithHostControl()
         {
             InitializeComponent();
         }

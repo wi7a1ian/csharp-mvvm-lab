@@ -25,7 +25,7 @@
                 <Separator />
                 <myControls:ExtendedControl TextFontSize="{Binding SelectedFontSize}"/>
                 <Separator />
-                <myControls:WithInjectedVmControl DataContext="{Binding SubViewModel}"/>
+                <myControls:ContextSyncedWithHostControl DataContext="{Binding SubViewModel}"/>
                 <Separator />
                 <myViews:SomeSubView TextFontSize="{Binding SelectedFontSize}"/>
                 <Separator />

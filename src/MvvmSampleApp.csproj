@@ -72,8 +72,8 @@
     <Compile Include="Views\SomeSubView.xaml.cs">
       <DependentUpon>SomeSubView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\WithInjectedVmControl.xaml.cs">
-      <DependentUpon>WithInjectedVmControl.xaml</DependentUpon>
+    <Compile Include="Controls\ContextSyncedWithHostControl.xaml.cs">
+      <DependentUpon>ContextSyncedWithHostControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ExtendedControl.xaml.cs">
       <DependentUpon>ExtendedControl.xaml</DependentUpon>
@@ -98,7 +98,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\WithInjectedVmControl.xaml">
+    <Page Include="Controls\ContextSyncedWithHostControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
