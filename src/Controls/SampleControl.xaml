@@ -7,6 +7,7 @@
              xmlns:myViewModels="clr-namespace:MvvmSampleApp.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="300">
+    <!-- We do not want to inherit DataContext from host control, we want to use our own -->
     <Grid DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
         <StackPanel>
             <TextBlock FontSize="{Binding TextFontSize}">Loren ipsum.</TextBlock>
