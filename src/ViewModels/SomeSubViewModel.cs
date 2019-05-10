@@ -1,12 +1,26 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Collections.Generic;
+using System.Windows.Threading;
 using MvvmSampleApp.Core;
 using MvvmSampleApp.ViewModels.Helpers;
+using MvvmSampleApp.Models;
 
 namespace MvvmSampleApp.ViewModels
 {
     public class SomeSubViewModel : ViewModelBase
     {
+        private readonly DispatcherTimer timer = new DispatcherTimer {
+            Interval = TimeSpan.FromSeconds(1),
+        };
+
+        private BusyState busy = BusyState.NotBusy;
+        public BusyState Busy
+        {
+            get { return busy; }
+            set { SetProperty(ref busy, value); }
+        }
+
         private string sampleText = string.Empty;
         public string SampleText
         {
@@ -23,7 +37,10 @@ namespace MvvmSampleApp.ViewModels
 
         public SomeSubViewModel()
         {
-            SampleText = "Loren Ipsum.\nLoren Ipsum.\nLoren Ipsum.\nLoren Ipsum.\n";
+            SampleText = "Loren Ipsum.";
+
+            timer.Tick += (_, __) => { Busy = (Busy == BusyState.Busy) ? BusyState.NotBusy : BusyState.Busy; timer.Start(); };
+            timer.Start();
         }
     }
 }

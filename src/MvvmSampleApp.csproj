@@ -69,6 +69,10 @@
     <Compile Include="Controls\ListeningForPropControl.xaml.cs">
       <DependentUpon>ListeningForPropControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\BusyStateToBooleanConverter.cs" />
+    <Compile Include="Converters\BusyStateToVisibilityConverter.cs" />
+    <Compile Include="Converters\Common.cs" />
+    <Compile Include="Models\BusyState.cs" />
     <Compile Include="Views\SomeSubView.xaml.cs">
       <DependentUpon>SomeSubView.xaml</DependentUpon>
     </Compile>
