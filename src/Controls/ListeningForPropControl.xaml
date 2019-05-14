@@ -13,6 +13,9 @@
     <UserControl.CommandBindings>
         <CommandBinding Command="{StaticResource PressMeCommand}" CanExecute="PressMe_CanExecute" Executed="PressMe_Executed"/>
     </UserControl.CommandBindings>
+    <UserControl.InputBindings>
+        <KeyBinding Key="U" Modifiers="Control" Command="{StaticResource PressMeCommand}" />
+    </UserControl.InputBindings>
     <Grid DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
         <Button Command="{StaticResource PressMeCommand}" Content="Press me!" />
     </Grid>
