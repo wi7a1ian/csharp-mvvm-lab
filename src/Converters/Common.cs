@@ -43,7 +43,7 @@ namespace MvvmSampleApp.Converters
         }
     }
 
-    public class NullVisibilityConverter : IValueConverter
+    public class NullToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -53,6 +53,19 @@ namespace MvvmSampleApp.Converters
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
+        }
+    }
+
+    public class NullToBoolConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value != null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value == null;
         }
     }
 
@@ -112,29 +125,40 @@ namespace MvvmSampleApp.Converters
 
     public class ByteToStringConverter : IValueConverter
     {
+        private const int kilobyte = 1024;
+        private const int megabyte = 1024 * kilobyte;
+        private const int gigabyte = 1024 * megabyte;
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             string size = "0 Bytes";
 
             if (value != null)
             {
-                double byteCount = System.Convert.ToDouble(value);
+                try
+                {
+                    double byteCount = System.Convert.ToDouble(value);
 
-                if (byteCount >= 1073741824)
-                {
-                    size = $"{(byteCount / 1073741824):n0} GB";
+                    if (byteCount >= gigabyte)
+                    {
+                        size = $"{(byteCount / gigabyte):n0} GB";
+                    }
+                    else if (byteCount >= megabyte)
+                    {
+                        size = $"{(byteCount / megabyte):n0} MB";
+                    }
+                    else if (byteCount >= kilobyte)
+                    {
+                        size = $"{(byteCount / 1024):n0} KB";
+                    }
+                    else if (byteCount < kilobyte)
+                    {
+                        size = $"{byteCount:n0} Bytes";
+                    }
                 }
-                else if (byteCount >= 1048576)
+                catch (Exception)
                 {
-                    size = $"{(byteCount / 1048576):n0} MB";
-                }
-                else if (byteCount >= 1024)
-                {
-                    size = $"{(byteCount / 1024):n0} KB";
-                }
-                else if (byteCount < 1024)
-                {
-                    size = $"{byteCount:n0} Bytes";
+                    size = "NaN"; // Taken from JavaScript, it means "not a number"
                 }
             }
 
