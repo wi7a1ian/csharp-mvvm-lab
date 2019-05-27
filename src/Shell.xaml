@@ -8,12 +8,15 @@
         xmlns:myControls="clr-namespace:MvvmSampleApp.Controls"
         xmlns:myViewModels="clr-namespace:MvvmSampleApp.ViewModels"
         mc:Ignorable="d"
-        Title="MVVM Lab" Height="450" Width="800">
+        Title="MVVM Lab" Height="450" Width="1200">
     <!-- Role - a master page providing the layout structure for the application
         Define certain top-level UI elements, such as the background, main menu, toolbar, define styles and borders. -->
     <Grid DataContext="{Binding ShellViewModel, Source={StaticResource Locator}}">
         <StackPanel Orientation="Horizontal">
-            <myViews:WithVmAsStaticResMainView Width="400"/>
+            <myViews:WithVmAsStaticResMainView Width="330"/>
+            <Separator />
+            <myViews:WithVmFromLocatorMainView/>
+            <Separator />
             <myViews:WithVmFromLocatorMainView/>
         </StackPanel>
     </Grid>

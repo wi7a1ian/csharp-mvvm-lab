@@ -73,6 +73,8 @@
     <Compile Include="Converters\BusyStateToVisibilityConverter.cs" />
     <Compile Include="Converters\Common.cs" />
     <Compile Include="Models\BusyState.cs" />
+    <Compile Include="Services\ISomeMediator.cs" />
+    <Compile Include="Services\SimpleVmMediator.cs" />
     <Compile Include="Views\SomeSubView.xaml.cs">
       <DependentUpon>SomeSubView.xaml</DependentUpon>
     </Compile>
@@ -91,7 +93,7 @@
     <Compile Include="Models\SomePassedBetweenCtrlsModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
-    <Compile Include="ViewModels\Helpers\ViewModelBase.cs" />
+    <Compile Include="Infrastructure\Wpf\ViewModelBase.cs" />
     <Compile Include="ViewModels\SomeSubViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Page Include="Controls\ListeningForPropControl.xaml">
@@ -130,8 +132,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ViewModels\Helpers\BindableBase.cs" />
-    <Compile Include="ViewModels\Helpers\RelayCommand.cs" />
+    <Compile Include="Infrastructure\Wpf\BindableBase.cs" />
+    <Compile Include="Infrastructure\Wpf\RelayCommand.cs" />
     <Compile Include="Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>

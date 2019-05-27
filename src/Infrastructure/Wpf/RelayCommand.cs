@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Input;
 
-namespace MvvmSampleApp.ViewModels.Helpers
+namespace MvvmSampleApp.Infrastructure.Wpf
 {
     public class RelayCommand<T> : ICommand
     {

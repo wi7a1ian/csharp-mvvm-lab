@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace MvvmSampleApp.ViewModels.Helpers
+namespace MvvmSampleApp.Infrastructure.Wpf
 {
     public abstract class BindableBase : INotifyPropertyChanged
     {

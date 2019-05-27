@@ -3,8 +3,8 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Windows.Threading;
 using MvvmSampleApp.Core;
-using MvvmSampleApp.ViewModels.Helpers;
 using MvvmSampleApp.Models;
+using MvvmSampleApp.Infrastructure.Wpf;
 
 namespace MvvmSampleApp.ViewModels
 {

@@ -4,8 +4,10 @@ using Unity.Injection;
 using MvvmSampleApp.Core;
 using MvvmSampleApp.Infrastructure;
 using MvvmSampleApp.ViewModels;
-using MvvmSampleApp.ViewModels.Helpers;
 using MvvmSampleApp.Views;
+using MvvmSampleApp.Infrastructure.Wpf;
+using MvvmSampleApp.Services;
+using Unity.Lifetime;
 
 namespace MvvmSampleApp
 {
@@ -29,10 +31,10 @@ namespace MvvmSampleApp
             container.RegisterType<IItemsRepository, ItemsRepository>();
 
             // services:
-            // none
+            container.RegisterType<ISomeMediator, SimpleVmMediator>(new ContainerControlledLifetimeManager());
 
             // viewmodels:
-            
+
             container.RegisterType<WithVmAsStaticResMainView>();
             container.RegisterType<ShellViewModel>();
             if(ViewModelBase.IsInDesignMode())
@@ -41,7 +43,7 @@ namespace MvvmSampleApp
             }
             else
             {
-                container.RegisterType<MainWindowViewModel>(new InjectionConstructor(typeof(IItemsRepository)));
+                container.RegisterType<MainWindowViewModel>(new InjectionConstructor(typeof(IItemsRepository), typeof(ISomeMediator)));
             }
 
             // other

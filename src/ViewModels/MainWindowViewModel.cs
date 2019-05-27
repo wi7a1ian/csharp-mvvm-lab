@@ -1,12 +1,13 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
 using MvvmSampleApp.Core;
-using MvvmSampleApp.ViewModels.Helpers;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.ComponentModel;
 using MvvmSampleApp.Models;
+using MvvmSampleApp.Infrastructure.Wpf;
+using MvvmSampleApp.Services;
 
 namespace MvvmSampleApp.ViewModels
 {
@@ -14,6 +15,7 @@ namespace MvvmSampleApp.ViewModels
     {
         private bool isLoaded = false;
         private readonly IItemsRepository itemsRepository;
+        private readonly ISomeMediator someMediator;
 
         #region subviewmodels
 
@@ -52,6 +54,7 @@ namespace MvvmSampleApp.ViewModels
         #region commands
 
         public ICommand ChangeFontSizeCommand { get; private set; }
+        public ICommand ChangeFontSizeForAllCommand { get; private set; }
 
         #endregion
         
@@ -67,11 +70,41 @@ namespace MvvmSampleApp.ViewModels
         }
 
 
-        public MainWindowViewModel(IItemsRepository itemsRepository)
+        public MainWindowViewModel(IItemsRepository itemsRepository, ISomeMediator someMediator)
         {
             this.itemsRepository = itemsRepository;
+            this.someMediator = someMediator;
 
             ConfigureCommands();
+            ConfigureSomeMediator();
+        }
+
+        private void ConfigureCommands()
+        {
+            ChangeFontSizeCommand = new RelayCommand<string>(
+                /*async*/ direction => { SelectedFontSize += (direction.Equals("+")) ? 1 : -1; SubViewModel.SelectedSubFontSize = SelectedFontSize; },
+                _ => true);
+
+            ChangeFontSizeForAllCommand = new RelayCommand<string> (
+                direction => { someMediator.OnChange(direction); },
+                _ => true);
+        }
+
+        private void ConfigureSomeMediator()
+        {
+            if (someMediator.SomeCommand == null)
+            {
+                // Im first! Register my command in the mediator.
+                someMediator.SomeCommand = this.ChangeFontSizeForAllCommand;
+            }
+            else
+            {
+                // My "plus"/"minus" btn will call cmd from the first VM that registered itself
+                this.ChangeFontSizeCommand = someMediator.SomeCommand;
+            }
+
+            // Everyone will change font size when requested
+            someMediator.SomethingChanged += (o, e) => { SelectedFontSize += (e.Something.Equals("+")) ? 1 : -1; SubViewModel.SelectedSubFontSize = SelectedFontSize; };
         }
 
         public void Loaded()
@@ -97,13 +130,5 @@ namespace MvvmSampleApp.ViewModels
                 isLoaded = false;
             }
         }
-
-        private void ConfigureCommands()
-        {
-            ChangeFontSizeCommand = new RelayCommand<string>(
-                /*async*/ direction => { SelectedFontSize += (direction.Equals("+")) ? 1 : -1; SubViewModel.SelectedSubFontSize = SelectedFontSize; },
-                _ => true);
-        }
-
     }
 }
