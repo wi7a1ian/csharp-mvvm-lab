@@ -7,16 +7,20 @@ using System.Windows.Input;
 
 namespace MvvmSampleApp.Services
 {
-    public class SimpleVmMediator : ISomeMediator
+    public class SimpleFontTransformationMediator : IFontTransformationMediator
     {
-        public ICommand SomeCommand { get; set; }
+        public ICommand ChangeMainFontCommand { get; set; }
 
-        public event EventHandler<SomethingChangedEventArgs> SomethingChanged;
+        public event EventHandler<FontChangedEventArgs> SomethingChanged;
 
-        public void OnChange(string what)
+        public void OnChangeDirection(string direction)
         {
-            SomethingChanged?.Invoke(this, new SomethingChangedEventArgs { Something = what });
+            SomethingChanged?.Invoke(this, new FontChangedEventArgs { Direction = direction });
         }
 
+        public void OnChangeFontSize(int size)
+        {
+            SomethingChanged?.Invoke(this, new FontChangedEventArgs { FontSize = size });
+        }
     }
 }

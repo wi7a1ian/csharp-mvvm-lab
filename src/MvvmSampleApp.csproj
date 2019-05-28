@@ -75,6 +75,10 @@
     <Compile Include="Models\BusyState.cs" />
     <Compile Include="Services\ISomeMediator.cs" />
     <Compile Include="Services\SimpleVmMediator.cs" />
+    <Compile Include="ViewModels\FontSizeChangeViewModel.cs" />
+    <Compile Include="Views\FontSizeChangeView.xaml.cs">
+      <DependentUpon>FontSizeChangeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SomeSubView.xaml.cs">
       <DependentUpon>SomeSubView.xaml</DependentUpon>
     </Compile>
@@ -99,6 +103,10 @@
     <Page Include="Controls\ListeningForPropControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\FontSizeChangeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SomeSubView.xaml">
       <Generator>MSBuild:Compile</Generator>

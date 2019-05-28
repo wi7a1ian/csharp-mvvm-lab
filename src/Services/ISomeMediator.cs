@@ -7,16 +7,18 @@ using System.Windows.Input;
 
 namespace MvvmSampleApp.Services
 {
-    public class SomethingChangedEventArgs : EventArgs
+    public class FontChangedEventArgs : EventArgs
     {
-        public string Something { get; set; }
+        public string Direction { get; set; }
+        public int FontSize { get; set; }
     }
 
-    public interface ISomeMediator
+    public interface IFontTransformationMediator
     {
-        event EventHandler<SomethingChangedEventArgs> SomethingChanged;
-        ICommand SomeCommand { get; set; }
+        event EventHandler<FontChangedEventArgs> SomethingChanged;
+        ICommand ChangeMainFontCommand { get; set; }
 
-        void OnChange(string what);
+        void OnChangeDirection(string direction);
+        void OnChangeFontSize(int size);
     }
 }

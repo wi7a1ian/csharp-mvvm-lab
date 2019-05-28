@@ -31,10 +31,9 @@ namespace MvvmSampleApp
             container.RegisterType<IItemsRepository, ItemsRepository>();
 
             // services:
-            container.RegisterType<ISomeMediator, SimpleVmMediator>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IFontTransformationMediator, SimpleFontTransformationMediator>(new ContainerControlledLifetimeManager());
 
             // viewmodels:
-
             container.RegisterType<WithVmAsStaticResMainView>();
             container.RegisterType<ShellViewModel>();
             if(ViewModelBase.IsInDesignMode())
@@ -43,7 +42,7 @@ namespace MvvmSampleApp
             }
             else
             {
-                container.RegisterType<MainWindowViewModel>(new InjectionConstructor(typeof(IItemsRepository), typeof(ISomeMediator)));
+                container.RegisterType<MainWindowViewModel>(new InjectionConstructor(typeof(IItemsRepository), typeof(IFontTransformationMediator)));
             }
 
             // other

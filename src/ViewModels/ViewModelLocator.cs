@@ -7,5 +7,6 @@ namespace MvvmSampleApp.ViewModels
         public ShellViewModel ShellViewModel => DiConfig.GetContainer().Resolve<ShellViewModel>();
         public MainWindowViewModel MainWindowViewModel => DiConfig.GetContainer().Resolve<MainWindowViewModel>();
         public SomeSubViewModel WithOwnVmControlViewModel => DiConfig.GetContainer().Resolve<SomeSubViewModel>();
+        public FontSizeChangeViewModel FontSizeChangeViewModel => DiConfig.GetContainer().Resolve<FontSizeChangeViewModel>();
     }
 }

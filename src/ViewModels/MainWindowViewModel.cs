@@ -8,6 +8,8 @@ using System.ComponentModel;
 using MvvmSampleApp.Models;
 using MvvmSampleApp.Infrastructure.Wpf;
 using MvvmSampleApp.Services;
+using System.Windows.Controls;
+using System;
 
 namespace MvvmSampleApp.ViewModels
 {
@@ -15,7 +17,9 @@ namespace MvvmSampleApp.ViewModels
     {
         private bool isLoaded = false;
         private readonly IItemsRepository itemsRepository;
-        private readonly ISomeMediator someMediator;
+        private readonly IFontTransformationMediator someMediator;
+
+        private IDictionary<string, Lazy<ContentControl>> registeredViews;
 
         #region subviewmodels
 
@@ -49,12 +53,20 @@ namespace MvvmSampleApp.ViewModels
             set { SetProperty(ref selectedFontSize, value); }
         }
 
+        private ContentControl activeView = new ContentControl();
+        public ContentControl ActiveView
+        {
+            get { return activeView; }
+            set { SetProperty(ref activeView, value); }
+        }
+
         #endregion
 
         #region commands
 
+        public ICommand ActivateViewCommand { get; private set; }
+
         public ICommand ChangeFontSizeCommand { get; private set; }
-        public ICommand ChangeFontSizeForAllCommand { get; private set; }
 
         #endregion
         
@@ -70,41 +82,57 @@ namespace MvvmSampleApp.ViewModels
         }
 
 
-        public MainWindowViewModel(IItemsRepository itemsRepository, ISomeMediator someMediator)
+        public MainWindowViewModel(IItemsRepository itemsRepository, IFontTransformationMediator someMediator)
         {
             this.itemsRepository = itemsRepository;
             this.someMediator = someMediator;
 
             ConfigureCommands();
             ConfigureSomeMediator();
+            ConfigureNavigation();
         }
 
         private void ConfigureCommands()
         {
-            ChangeFontSizeCommand = new RelayCommand<string>(
-                /*async*/ direction => { SelectedFontSize += (direction.Equals("+")) ? 1 : -1; SubViewModel.SelectedSubFontSize = SelectedFontSize; },
-                _ => true);
-
-            ChangeFontSizeForAllCommand = new RelayCommand<string> (
-                direction => { someMediator.OnChange(direction); },
+            ChangeFontSizeCommand = new RelayCommand<string>( /*async*/
+                direction => { 
+                    SelectedFontSize += (direction.Equals("+")) ? 1 : -1; SubViewModel.SelectedSubFontSize = SelectedFontSize; 
+                    someMediator?.OnChangeFontSize(SelectedFontSize); },
                 _ => true);
         }
 
         private void ConfigureSomeMediator()
         {
-            if (someMediator.SomeCommand == null)
+            if (someMediator.ChangeMainFontCommand == null)
             {
                 // Im first! Register my command in the mediator.
-                someMediator.SomeCommand = this.ChangeFontSizeForAllCommand;
+                // Everyone will be able to change  font size when requested
+                someMediator.ChangeMainFontCommand = this.ChangeFontSizeCommand;
             }
-            else
-            {
-                // My "plus"/"minus" btn will call cmd from the first VM that registered itself
-                this.ChangeFontSizeCommand = someMediator.SomeCommand;
-            }
+        }
 
-            // Everyone will change font size when requested
-            someMediator.SomethingChanged += (o, e) => { SelectedFontSize += (e.Something.Equals("+")) ? 1 : -1; SubViewModel.SelectedSubFontSize = SelectedFontSize; };
+        private void ConfigureNavigation()
+        {
+            // TODO: Add navigation service instead (i.e: singleton that can register content holder (shell) and all the views that want to be swapped in main window)
+            // navigationService.Activate(name); (= deactivates ActiveView, replaces ActiveView, activates ActiveView)
+            // similar to IDialogService...
+
+            registeredViews = new Dictionary<string, Lazy<ContentControl>>
+            {
+                { "View1", new Lazy<ContentControl>( () =>  new Views.WithVmFromLocatorMainView() )},
+                { "View2", new Lazy<ContentControl>( () =>  new Views.WithVmFromLocatorMainView() )},
+                { "View3", new Lazy<ContentControl>( () =>  new Views.WithVmFromLocatorMainView() )}
+            };
+
+            ActivateViewCommand = new RelayCommand<string>(
+                name => {
+                    if (registeredViews.ContainsKey(name))
+                    {
+                        ActiveView = registeredViews[name].Value;
+                    }
+                }, canExecute => true);
+
+           // ActivateViewCommand.Execute("View1");
         }
 
         public void Loaded()

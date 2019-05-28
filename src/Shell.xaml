@@ -11,13 +11,19 @@
         Title="MVVM Lab" Height="450" Width="1200">
     <!-- Role - a master page providing the layout structure for the application
         Define certain top-level UI elements, such as the background, main menu, toolbar, define styles and borders. -->
+    <Window.InputBindings>
+        <KeyBinding Key="D1" Modifiers="Control" Command="{Binding ActivateViewCommand}" CommandParameter="View1" />
+        <KeyBinding Key="D2" Modifiers="Control" Command="{Binding ActivateViewCommand}" CommandParameter="View2" />
+        <KeyBinding Key="D3" Modifiers="Control" Command="{Binding ActivateViewCommand}" CommandParameter="View3" />
+    </Window.InputBindings>
     <Grid DataContext="{Binding ShellViewModel, Source={StaticResource Locator}}">
         <StackPanel Orientation="Horizontal">
             <myViews:WithVmAsStaticResMainView Width="330"/>
             <Separator />
             <myViews:WithVmFromLocatorMainView/>
             <Separator />
-            <myViews:WithVmFromLocatorMainView/>
+            <!--<ContentPresenter Content="{Binding ActiveView, Mode=OneWay}"/>-->
+            <myViews:FontSizeChangeView />
         </StackPanel>
     </Grid>
 </Window>
