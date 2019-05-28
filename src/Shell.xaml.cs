@@ -1,4 +1,6 @@
-﻿using MvvmSampleApp.ViewModels;
+﻿using MvvmSampleApp.Infrastructure.Wpf;
+using MvvmSampleApp.ViewModels;
+using MvvmSampleApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +21,17 @@ namespace MvvmSampleApp
 {
     public partial class Shell : Window
     {
-        public Shell()
+        public Shell(INavigationService navigator)
         {
             InitializeComponent();
+            RegisterViews(navigator);
+        }
+
+        private void RegisterViews(INavigationService navigator)
+        {
+            navigator.RegisterView<FontSizeChangeView>("view1");
+            navigator.RegisterView<SomeSubView>("view2");
+            navigator.RegisterView<WithVmFromLocatorMainView>("view3");
         }
     }
 }

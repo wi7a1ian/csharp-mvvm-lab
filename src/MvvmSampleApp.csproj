@@ -72,8 +72,11 @@
     <Compile Include="Converters\BusyStateToBooleanConverter.cs" />
     <Compile Include="Converters\BusyStateToVisibilityConverter.cs" />
     <Compile Include="Converters\Common.cs" />
+    <Compile Include="Infrastructure\Wpf\IActiveAware.cs" />
+    <Compile Include="Infrastructure\Wpf\INavigationService.cs" />
     <Compile Include="Models\BusyState.cs" />
     <Compile Include="Services\ISomeMediator.cs" />
+    <Compile Include="Services\SimpleNavigationService.cs" />
     <Compile Include="Services\SimpleVmMediator.cs" />
     <Compile Include="ViewModels\FontSizeChangeViewModel.cs" />
     <Compile Include="Views\FontSizeChangeView.xaml.cs">

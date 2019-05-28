@@ -13,6 +13,30 @@ namespace MvvmSampleApp.ViewModels
 
     public class ShellViewModel : ViewModelBase
     {
-        // TODO: switch to another view (subview)
+        private readonly INavigationService navigator;
+
+        public ICommand ActivateViewCommand { get; private set; }
+
+        private FrameworkElement activeView = new FrameworkElement();
+        public FrameworkElement ActiveView
+        {
+            get { return activeView; }
+            set { SetProperty(ref activeView, value); }
+        }
+
+        public ShellViewModel( INavigationService navigator )
+        {
+            this.navigator = navigator;
+            ConfigureNavigation();
+        }
+
+        private void ConfigureNavigation()
+        {
+            ActivateViewCommand = new RelayCommand<string>(
+                name => navigator.NavigateTo(name),
+                canExecute => true);
+
+            navigator.Navigating += (o, e) => ActiveView = e.View;
+        }
     }
 }

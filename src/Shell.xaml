@@ -8,6 +8,7 @@
         xmlns:myControls="clr-namespace:MvvmSampleApp.Controls"
         xmlns:myViewModels="clr-namespace:MvvmSampleApp.ViewModels"
         mc:Ignorable="d"
+        DataContext="{Binding ShellViewModel, Source={StaticResource Locator}}"
         Title="MVVM Lab" Height="450" Width="1200">
     <!-- Role - a master page providing the layout structure for the application
         Define certain top-level UI elements, such as the background, main menu, toolbar, define styles and borders. -->
@@ -16,14 +17,13 @@
         <KeyBinding Key="D2" Modifiers="Control" Command="{Binding ActivateViewCommand}" CommandParameter="View2" />
         <KeyBinding Key="D3" Modifiers="Control" Command="{Binding ActivateViewCommand}" CommandParameter="View3" />
     </Window.InputBindings>
-    <Grid DataContext="{Binding ShellViewModel, Source={StaticResource Locator}}">
+    <Grid>
         <StackPanel Orientation="Horizontal">
             <myViews:WithVmAsStaticResMainView Width="330"/>
             <Separator />
             <myViews:WithVmFromLocatorMainView/>
             <Separator />
-            <!--<ContentPresenter Content="{Binding ActiveView, Mode=OneWay}"/>-->
-            <myViews:FontSizeChangeView />
+            <ContentPresenter Content="{Binding ActiveView, Mode=OneWay}"/>
         </StackPanel>
     </Grid>
 </Window>

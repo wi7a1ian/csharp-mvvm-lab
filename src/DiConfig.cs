@@ -32,7 +32,8 @@ namespace MvvmSampleApp
 
             // services:
             container.RegisterType<IFontTransformationMediator, SimpleFontTransformationMediator>(new ContainerControlledLifetimeManager());
-
+            container.RegisterType<INavigationService, SimpleNavigationService>(new ContainerControlledLifetimeManager());
+            
             // viewmodels:
             container.RegisterType<WithVmAsStaticResMainView>();
             container.RegisterType<ShellViewModel>();

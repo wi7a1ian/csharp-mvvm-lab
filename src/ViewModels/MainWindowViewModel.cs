@@ -19,8 +19,6 @@ namespace MvvmSampleApp.ViewModels
         private readonly IItemsRepository itemsRepository;
         private readonly IFontTransformationMediator someMediator;
 
-        private IDictionary<string, Lazy<ContentControl>> registeredViews;
-
         #region subviewmodels
 
         public class SomeSubViewModel : ViewModelBase
@@ -45,19 +43,11 @@ namespace MvvmSampleApp.ViewModels
 
         public ObservableCollection<string> Items { get; } = new ObservableCollection<string>();
 
-
         private int selectedFontSize = 16;
         public int SelectedFontSize
         {
             get { return selectedFontSize; }
             set { SetProperty(ref selectedFontSize, value); }
-        }
-
-        private ContentControl activeView = new ContentControl();
-        public ContentControl ActiveView
-        {
-            get { return activeView; }
-            set { SetProperty(ref activeView, value); }
         }
 
         #endregion
@@ -82,14 +72,15 @@ namespace MvvmSampleApp.ViewModels
         }
 
 
-        public MainWindowViewModel(IItemsRepository itemsRepository, IFontTransformationMediator someMediator)
+        public MainWindowViewModel(
+            IItemsRepository itemsRepository, 
+            IFontTransformationMediator someMediator)
         {
             this.itemsRepository = itemsRepository;
             this.someMediator = someMediator;
 
             ConfigureCommands();
             ConfigureSomeMediator();
-            ConfigureNavigation();
         }
 
         private void ConfigureCommands()
@@ -109,30 +100,6 @@ namespace MvvmSampleApp.ViewModels
                 // Everyone will be able to change  font size when requested
                 someMediator.ChangeMainFontCommand = this.ChangeFontSizeCommand;
             }
-        }
-
-        private void ConfigureNavigation()
-        {
-            // TODO: Add navigation service instead (i.e: singleton that can register content holder (shell) and all the views that want to be swapped in main window)
-            // navigationService.Activate(name); (= deactivates ActiveView, replaces ActiveView, activates ActiveView)
-            // similar to IDialogService...
-
-            registeredViews = new Dictionary<string, Lazy<ContentControl>>
-            {
-                { "View1", new Lazy<ContentControl>( () =>  new Views.WithVmFromLocatorMainView() )},
-                { "View2", new Lazy<ContentControl>( () =>  new Views.WithVmFromLocatorMainView() )},
-                { "View3", new Lazy<ContentControl>( () =>  new Views.WithVmFromLocatorMainView() )}
-            };
-
-            ActivateViewCommand = new RelayCommand<string>(
-                name => {
-                    if (registeredViews.ContainsKey(name))
-                    {
-                        ActiveView = registeredViews[name].Value;
-                    }
-                }, canExecute => true);
-
-           // ActivateViewCommand.Execute("View1");
         }
 
         public void Loaded()
