@@ -44,6 +44,6 @@ namespace MvvmSampleApp.ViewModels.Helpers
     public class RelayCommand : RelayCommand<object>
     {
         public RelayCommand(Action execute) : this(execute, null) { }
-        public RelayCommand(Action execute, Func<bool> canExecute) : base(param => execute(), param => canExecute()) { }
+        public RelayCommand(Action execute, Func<bool> canExecute) : base(param => execute(), param => (canExecute != null) ? canExecute() : true) { }
     }
 }
