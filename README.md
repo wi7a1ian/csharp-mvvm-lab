@@ -33,24 +33,28 @@
 ### Details
 - read [Practial MVVM Manifesto](https://web.archive.org/web/20160127012811/practicalmvvm.com/Manifesto/)
 - MVVM vs MVC vs MVP: instead of the *controller of the MVC pattern*, or the *presenter of the MVP pattern*, **MVVM has a binder**, which automates communication between the view and its bound properties in the view model. The main difference between the view model and the Presenter in the MVP pattern, is that the presenter has a reference to a view whereas the view model does not. Instead, a view directly binds to properties on the view model to send and receive updates. To function efficiently, this requires a binding technology or generating boilerplate code to do the binding
-- the **ViewModel** retrieves data from the (domain) *Model* and then makes the data available to the *View*, and may reformat the data in some way that makes it simpler for the *View* to handle
+- the *ViewModel* retrieves data from the (domain) *Model* and then makes the data available to the *View*, and may reformat the data in some way that makes it simpler for the *View* to handle
+- the *ViewModel* also provides implementations of commands that a user of the application initiates in the *View*, i.e. when a user clicks a button in the UI, that action can trigger a command in the *ViewModel*
+- the *ViewModel* may also be responsible for defining logical state changes that affect some aspect of the display in the *View*, such as an indication that some operation is pending
+- in order for the *ViewModel* to participate in two-way data binding with the *View*, its properties must raise the `PropertyChanged` event
+- *Views* can be connected to *ViewModels* in code-behind file, or in the view itself (`DataContext`) via static resource or service locator
 
 ### Suggested project file structure
 - *App.xaml* - loads configuration, logs unhandled exceptions, registers global resources like `ServiceLocator`
-- *Configuration.cs* - i.e: DI container configuration
+- *Configuration.cs* - i.e. DI container configuration
 - *Shell.xaml* - shell for *ViewModels*, can handle navigation and dialogs/modals
 - *Controls* - reusable UI controls (application independent views) without *ViewModels*
   - *DateTimePicker.xaml*
 - *Converters* - converters for all the *Views*
   - *Common.cs* - i.: `NullToVisibilityConverter`
   - *MyFlagToStringConverter.cs*
-- *Core*: domain model (aka domain classes) i:e domain entities, domain services, exceptions, factories, validators, repository and service interfaces...
+- *Core*: domain model (aka domain classes) i.e. domain entities, domain services, exceptions, factories, validators, repository and service interfaces...
 - *Events* - events/messages used with event aggregator, used via *ViewModels*
-- *Infrastructure* - technology specific services, i.e: DAL implementing repository interfaces, reusable WPF helper classes
+- *Infrastructure* - technology specific services, i.e. DAL implementing repository interfaces, reusable WPF helper classes
 - *Localization* - classes and resources for application localization
     - Strings.resx/.resw
 - Resources - styles, icons and templates
-- *Services*: app specific services, so anything with app logic that does not belong to the domain model but is used via *ViewModels*, i.e: mediators, dialog service
+- *Services*: app specific services, so anything with app logic that does not belong to the domain model but is used via *ViewModels*, i.e. mediators, dialog service
 - ViewModels:
     - MainWindowModel.cs
     - MyViewModel.cs
