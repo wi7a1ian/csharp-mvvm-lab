@@ -37,7 +37,21 @@
 - the *ViewModel* also provides implementations of commands that a user of the application initiates in the *View*, i.e. when a user clicks a button in the UI, that action can trigger a command in the *ViewModel*
 - the *ViewModel* may also be responsible for defining logical state changes that affect some aspect of the display in the *View*, such as an indication that some operation is pending
 - in order for the *ViewModel* to participate in two-way data binding with the *View*, its properties must raise the `PropertyChanged` event
-- *Views* can be connected to *ViewModels* in code-behind file, or in the view itself (`DataContext`) via static resource or service locator
+- *Views* can be connected to *ViewModels* in code-behind file, or in the view itself (`DataContext`) via static resource. A common approach to doing this is to use a `ViewModelLocator`
+- if a *ViewModel* does not have any constructor arguments, the *ViewModel* can be instantiated in the *View* as its `DataContext`
+- the *ViewModel* can implement commands as either a Command Method or as a Command Object (an object that implements the `ICommand` interface)
+- the *View* should not have any logic code that you need to unit test
+- the *View* defines and handles UI visual behavior, such as animations or transitions that may be triggered from a state change in the *ViewModel* or via the user's interaction with the UI
+- the *View* may customize the data binding behavior between the *View* and the *ViewModel*. For example, the *View* may use value converters to format the data to be displayed in the UI, or it may use validation rules to provide additional input data validation to the user
+- the *View's* code-behind may define UI logic to implement visual behavior that is difficult to express in XAML or that requires direct references to the specific UI controls defined in the *View*
+- the *Model* classes typically provide property and collection change notification events through the `INotifyPropertyChanged` and `INotifyCollectionChanged` interfaces. This allows them to be easily data bound in the *View*. *Model* classes that represent collections of objects typically derive from the `ObservableCollection<T>` class
+- sometimes you will need to work with *Model* objects that do not implement the INotifyPropertyChanged, INotifyCollectionChanged, IDataErrorInfo, or INotifyDataErrorInfo interfaces. In those cases, the *ViewModel* may need to wrap the model objects and expose the required properties to the *View*
+- the *Model* classes typically provide data validation and error reporting through either the `IDataErrorInfo` or `INotifyDataErrorInfo` interfaces
+- the *Model* classes are typically used in conjunction with a service or repository that encapsulates data access and caching
+- if you need to implement filtering, sorting, grouping, or selection tracking of items in the *collection* from within your *ViewModel*, your *ViewModel* should create an instance of a collection view class for each collection to be exposed to the view. You can then subscribe to selection changed events, such as the `CurrentChanged` event, or control filtering, sorting, or grouping using the methods provided by the collection view class from within your *ViewModel*
+- the *ViewModel* should implement a read-only property that returns an `ICollectionView` reference so that controls in the *View* can data bind to the collection view object and interact with it. All WPF controls that derive from the `ItemsControl` base class can automatically interact with `ICollectionView` classes
+- create a `UserControl` when implementing an application specific *View* with a *ViewModel* and few dependency properties which have to be synchronized with properties of the *ViewModel*. These views should be put into the *Views/* directory
+- create a *templated control* when implementing a reusable UI control without *ViewModel* and/or lots of dependency properties which are directly bound to attributes in XAML. These controls should be put into the Controls directory.
 
 ### Suggested project file structure
 - *App.xaml* - loads configuration, logs unhandled exceptions, registers global resources like `ServiceLocator`
