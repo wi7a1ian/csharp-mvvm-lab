@@ -11,10 +11,10 @@
   - *ViewModel* should supply *Design-Time Data*
   - DI container should be configured to support design-time
 - communication:
-  - *View* and **ViewModel** interact via: data binding, commands, data validation and error reporting
-  - *View* and **Control** interact via: dependency property
-  - *ViewModel* and **Control** interact via: (data binding / commands) + dependency property
-  - *ViewModel* and **ViewModel** event aggregator, mediator (including dialog service), data binding + dependency property (less preferable), data binding + data context (less preferable)
+  - *View* and *ViewModel* interact via: data binding, commands, data validation and error reporting
+  - *View* and *Control* interact via: dependency property
+  - *ViewModel* and *Control* interact via: (data binding / commands) + dependency property
+  - *ViewModel* and *ViewModel* event aggregator, mediator (including dialog service), data binding + dependency property (less preferable), data binding + data context (less preferable)
 - binding: use *ViewModels* that inherits `BindableBase` that implements `INotifyPropertyChanged`
 - commands: define `DelegateCommand` (aka `RelayCommand`)
 - validation: implement data validation via the `IDataErrorInfo` or `INotifyDataErrorInfo` interfaces
@@ -34,3 +34,41 @@
 - read [Practial MVVM Manifesto](https://web.archive.org/web/20160127012811/practicalmvvm.com/Manifesto/)
 - MVVM vs MVC vs MVP: instead of the *controller of the MVC pattern*, or the *presenter of the MVP pattern*, **MVVM has a binder**, which automates communication between the view and its bound properties in the view model. The main difference between the view model and the Presenter in the MVP pattern, is that the presenter has a reference to a view whereas the view model does not. Instead, a view directly binds to properties on the view model to send and receive updates. To function efficiently, this requires a binding technology or generating boilerplate code to do the binding
 - the **ViewModel** retrieves data from the (domain) *Model* and then makes the data available to the *View*, and may reformat the data in some way that makes it simpler for the *View* to handle
+
+### Suggested project file structure
+- *App.xaml* - loads configuration, logs unhandled exceptions, registers global resources like `ServiceLocator`
+- *Configuration.cs* - i.e: DI container configuration
+- *Shell.xaml* - shell for *ViewModels*, can handle navigation and dialogs/modals
+- *Controls* - reusable UI controls (application independent views) without *ViewModels*
+  - *DateTimePicker.xaml*
+- *Converters* - converters for all the *Views*
+  - *Common.cs* - i.: `NullToVisibilityConverter`
+  - *MyFlagToStringConverter.cs*
+- *Core*: domain model (aka domain classes) i:e domain entities, domain services, exceptions, factories, validators, repository and service interfaces...
+- *Events* - events/messages used with event aggregator, used via *ViewModels*
+- *Infrastructure* - technology specific services, i.e: DAL implementing repository interfaces, reusable WPF helper classes
+- *Localization* - classes and resources for application localization
+    - Strings.resx/.resw
+- Resources - styles, icons and templates
+- *Services*: app specific services, so anything with app logic that does not belong to the domain model but is used via *ViewModels*, i.e: mediators, dialog service
+- ViewModels:
+    - MainWindowModel.cs
+    - MyViewModel.cs
+    - Dialogs
+        - SelectItemDialogModel.cs
+- Views:
+    - MainWindow.xaml
+    - MyView.xaml
+    - Dialogs
+        - SelectItemDialog.xaml
+
+# More Exercises
+- add design time data (default `dtor` or injected by DI container)
+- add navigation and enable visibility-awareness on *ViewModels*
+- add dialog/modal service
+- add event aggregator
+- add support for localization
+- add form validation
+- log unhandled exceptions (from both the dispatcher and current ap domain) and unobserved tasks
+- add style [MaterialDesign](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit)
+- compare with [MVVM Light Toolkit](http://www.mvvmlight.net/)
