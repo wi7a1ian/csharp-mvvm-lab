@@ -85,9 +85,9 @@
 
 # More Exercises
 - add design time data ([default `dtor`](https://gist.github.com/wi7a1ian/d2257384ec77f963463748d7df315be5) or injected by DI container)
-- add navigation and enable visibility-awareness on *ViewModels* (via nav service, attach prop defined in *Shell.xaml* or [code-behind](https://gist.github.com/wi7a1ian/6adf1dce77e6fe8d5df3752b37e66235))
+- add navigation([branch](https://github.com/wi7a1ian/csharp-mvvm-lab/tree/dev/add-navigation) and enable visibility-awareness on *ViewModels* (via nav service, attach prop defined in *Shell.xaml* or [code-behind](https://gist.github.com/wi7a1ian/6adf1dce77e6fe8d5df3752b37e66235))
 - add [dialog/modal service](https://gist.github.com/wi7a1ian/927d4131e099bf31e957c0da5e8f84e9) with [modal presenter control](https://gist.github.com/wi7a1ian/bef05df08402b62102fb64246e1e1677)
-- add [event aggregator](https://gist.github.com/wi7a1ian/7f067c3ddf9d69ec3ba73080fac6f32e) for VM-to-VM communication
+- add mediator ([branch](https://github.com/wi7a1ian/csharp-mvvm-lab/tree/dev/add-vm-mediator) or [event aggregator](https://gist.github.com/wi7a1ian/7f067c3ddf9d69ec3ba73080fac6f32e) for better VM-to-VM communication
 - add [support for localization](https://gist.github.com/wi7a1ian/ea12d9b69bcb2cfcd527cd20e4a36bed) ([reactive](https://gist.github.com/wi7a1ian/b813653db41cb1669d19682753a6f41d))
 - add [form validation](https://gist.github.com/wi7a1ian/8f7575295c8575b3e2ed5818204df67b)
 - log unhandled exceptions (from both the dispatcher and current ap domain) and unobserved tasks via [global exception handlers](https://gist.github.com/wi7a1ian/7a35a0c4479fb78879a052e882c83ed0)
