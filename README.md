@@ -14,9 +14,12 @@
   - *View* and *ViewModel* interact via: data binding, commands, data validation and error reporting
   - *View* and *Control* interact via: dependency property
   - *ViewModel* and *Control* interact via: (data binding / commands) + dependency property
-  - *ViewModel* and *ViewModel* event aggregator, mediator (including dialog service), data binding + dependency property (less preferable), data binding + data context (less preferable)
-- binding: use *ViewModels* that inherits `BindableBase` that implements `INotifyPropertyChanged`
-- commands: define `DelegateCommand` (aka `RelayCommand`)
+  - *ViewModel* and *ViewModel* interact via: event aggregator, mediator (including dialog service), data binding + dependency property (less preferable), data binding + data context (less preferable, when one *View* embeds another)
+- binding: 
+  - use *ViewModels* that inherits [`BindableBase`](https://gist.github.com/wi7a1ian/1eb34a2d1135cacc0af64106301f853b) that implements `INotifyPropertyChanged`
+  - connect *Views* to *ViewModels* via `ViewModelLocator`, binding to the `DataContext` of the first child element within `UserControl`/`Page`
+  - use specialized converters when data type of the bound property is not consumable by XAML controls
+- commands: define [`DelegateCommand` (aka `RelayCommand`)](https://gist.github.com/wi7a1ian/28c042b64cfd26e8e3bb5de64c0d50f6)
 - validation: implement data validation via the `IDataErrorInfo` or `INotifyDataErrorInfo` interfaces
 - collections: 
   - derive classes that represent collections of objects from the `ObservableCollection<T>` class, which provides an implementation of the `INotifyCollectionChanged` interface
@@ -81,12 +84,14 @@
         - SelectItemDialog.xaml
 
 # More Exercises
-- add design time data (default `dtor` or injected by DI container)
-- add navigation and enable visibility-awareness on *ViewModels*
-- add dialog/modal service
-- add event aggregator
-- add support for localization
-- add form validation
-- log unhandled exceptions (from both the dispatcher and current ap domain) and unobserved tasks
-- add style [MaterialDesign](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit)
+- add design time data ([default `dtor`](https://gist.github.com/wi7a1ian/d2257384ec77f963463748d7df315be5) or injected by DI container)
+- add navigation and enable visibility-awareness on *ViewModels* (via nav service, attach prop defined in *Shell.xaml* or [code-behind](https://gist.github.com/wi7a1ian/6adf1dce77e6fe8d5df3752b37e66235))
+- add [dialog/modal service](https://gist.github.com/wi7a1ian/927d4131e099bf31e957c0da5e8f84e9) with [modal presenter control](https://gist.github.com/wi7a1ian/bef05df08402b62102fb64246e1e1677)
+- add [event aggregator](https://gist.github.com/wi7a1ian/7f067c3ddf9d69ec3ba73080fac6f32e) for VM-to-VM communication
+- add [support for localization](https://gist.github.com/wi7a1ian/ea12d9b69bcb2cfcd527cd20e4a36bed) ([reactive](https://gist.github.com/wi7a1ian/b813653db41cb1669d19682753a6f41d))
+- add [form validation](https://gist.github.com/wi7a1ian/8f7575295c8575b3e2ed5818204df67b)
+- log unhandled exceptions (from both the dispatcher and current ap domain) and unobserved tasks via [global exception handlers](https://gist.github.com/wi7a1ian/7a35a0c4479fb78879a052e882c83ed0)
+- add [event-to-command](https://gist.github.com/wi7a1ian/25645daf4c8ad11efcc2ca4483350839)
+- use style [MaterialDesign](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit)
+- use `async` events and [avoid deadlocks](https://gist.github.com/wi7a1ian/b1c2fe0510d6a4e109975cc2ac30038f)
 - compare with [MVVM Light Toolkit](http://www.mvvmlight.net/)
